@@ -66,9 +66,9 @@ function Header(){
         <div id="nav-body">
             <h1>
                 <img className="logo" src={logo} alt="logo"/>
-                <button>
-                    <span>COZ Shopping</span>
-                </button>
+                
+                    <Link to='/' style={{textDecoration:"none", color:"black"}}><span>COZ Shopping</span></Link>
+                
             </h1>
             
             <button onClick={openModalHandler}>

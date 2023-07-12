@@ -9,10 +9,13 @@ import{Routes,Route} from "react-router-dom";
 
 function App() {
   //서버에서 받아온 물건 리스트 담을 박스
-  const [product,setProducts]=useState([]);
+  const [products,setProducts]=useState([]);
   //상품리스트와 북마크리스트의 상단 카테고리 아이콘
   const [buttonType,setButtonType]=useState('All');
-  
+  //받아온 상품리스트를 타입에맞게 필터
+  const filteredProducts = products.filter(product=>product.type===buttonType);
+
+
 
 
 
@@ -31,11 +34,14 @@ function App() {
 
 
   return (
-    <div className="App">
+    <>
       <Header />
-        <Main/>
+        <Routes>
+          <Route path="/" element={<Main />}/>
+        </Routes>
+          
       <Footer />
-    </div>
+    </>
   );
 }
 
