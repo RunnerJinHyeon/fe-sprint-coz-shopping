@@ -76,7 +76,7 @@ function Main () {
             }).catch(err=>{
                 console.log(err);
             })
-    })
+    },[])
 
 
     return (
