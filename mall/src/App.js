@@ -10,6 +10,8 @@ import{Routes,Route} from "react-router-dom";
 function App() {
   //서버에서 받아온 물건 리스트 담을 박스
   const [product,setProducts]=useState([]);
+  //상품리스트와 북마크리스트의 상단 카테고리 아이콘
+  const [buttonType,setButtonType]=useState('All');
   
 
 
