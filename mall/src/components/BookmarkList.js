@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import '../App.css';
-import imgOff from "../images/bookmark-off.png";
 import imgOn from "../images/bookmark-on.png";
 import ModalBookmark from './ModalBookMark';
 
@@ -34,29 +33,27 @@ export const BrandContainer = styled.div`
 
 `;
 
-function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, setIsOnToast, filteredProducts, handleIconClick, bookmarks, handleIconClickAllType, removeBookmark, addBookmark, 
+
+function BookmarkList({buttonType, products, setSelectedProductId, isOnToast, setIsOnToast, handleIconClick, bookmarks, handleIconClickAllType, removeBookmark, addBookmark, 
     starList, setStarList, setBookmarks, selectedProductId}){
 
     const openModal =(productId)=>{
       setSelectedProductId(productId)
     };
- 
-    console.log(buttonType)
+
+    // console.log(buttonType)
     
     if(buttonType === "All"){
-        
-        const allProducts = products.map((product,index) => {
-            const BookmarkStorage= (product)=> {
-                starList[index] ? removeBookmark(product.id) : addBookmark(product)};
-            
+
+        const allProducts = bookmarks.map((product,index) => {
+
             if(product.type === 'Brand'){
                 return(
                     <div key={product.id}>
                     <ImgContainer imageurl ={product.brand_image_url} onClick={()=> openModal(product.id)}>
                     <IconContainer>
-                    <img onClick={(event) => {handleIconClickAllType(event, product.id);
-                       BookmarkStorage(product)}}
-                        src={starList[index] ? imgOn : imgOff}
+                    <img
+                        src={imgOn}
                         alt="img"
                         width="25px"
                         height="25px"
@@ -75,9 +72,8 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
                     <div key={product.id}>
                     <ImgContainer imageurl={product.image_url} onClick={()=> openModal(product.id)}>
                     <IconContainer>
-                    <img onClick={(event) => {handleIconClickAllType(event, product.id);
-                       BookmarkStorage(product)}}
-                        src={starList[index] ? imgOn : imgOff}
+                    <img 
+                        src={imgOn}
                         alt="img"
                         width="25px"
                         height="25px"
@@ -93,9 +89,8 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
                      <div key={product.id}>
                     <ImgContainer  imageurl={product.image_url} onClick={()=> openModal(product.id)}>
                     <IconContainer>
-                    <img onClick={(event) => {handleIconClickAllType(event, product.id);
-                       BookmarkStorage(product)}}
-                        src={starList[index] ? imgOn : imgOff}
+                    <img 
+                        src={imgOn}
                         alt="img"
                         width="25px"
                         height="25px"
@@ -113,9 +108,8 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
                     <div key={product.id}>
                     <ImgContainer imageurl={product.image_url} onClick={()=> openModal(product.id)}>
                     <IconContainer>
-                    <img onClick={(event) => {handleIconClickAllType(event, product.id);
-                       BookmarkStorage(product)}}
-                        src={starList[index] ? imgOn : imgOff}
+                    <img 
+                        src={imgOn}
                         alt="img"
                         width="25px"
                         height="25px"
@@ -128,9 +122,9 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
                     return null;
                 }
         });
-        return( <>
-            { allProducts}
-            <ModalBookmark selectedProductId={selectedProductId} 
+        return(<>
+            {allProducts}
+            <ModalBookmark selectedProductId={selectedProductId} setStarList={setStarList}
             setSelectedProductId={setSelectedProductId} 
             products={products} isOnToast={isOnToast} 
             setIsOnToast={setIsOnToast} bookmarks={bookmarks} 
@@ -139,20 +133,16 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
        
     }
 
+    const filteredProducts = bookmarks.filter((product)=> product.type === buttonType)
     const renderedProducts = filteredProducts.map((product, index) => {
-
-  
-
-        const BookmarkStorage= (product)=> {
-            starList[index] ? removeBookmark(product.id) : addBookmark(product)};
-
+        
         if(product.type === 'Brand'){
         return(
             <div key={product.id}>
             <ImgContainer imageurl ={product.brand_image_url} onClick={()=> openModal(product.id)}>
             <IconContainer>
-            <img onClick={(event)=> {handleIconClick(event, product.id); BookmarkStorage(product)}}
-            src ={starList[index] ? imgOn :imgOff} alt="img" width="25px" height="25px"/>
+            <img 
+            src ={imgOn} alt="img" width="25px" height="25px"/>
             </IconContainer>
             </ImgContainer>
             <BrandContainer>
@@ -167,8 +157,8 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
             <div key={product.id}>
             <ImgContainer imageurl={product.image_url} onClick={()=> openModal(product.id)}>
             <IconContainer>
-            <img onClick={(event)=> {handleIconClick(event, product.id); BookmarkStorage(product)}}
-            src ={starList[index] ? imgOn :imgOff} alt="img" width="25px" height="25px"/>
+            <img 
+            src ={imgOn} alt="img" width="25px" height="25px"/>
             </IconContainer>
             </ImgContainer>
             <h3>{product.title}</h3>
@@ -180,8 +170,7 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
              <div key={product.id}>
             <ImgContainer  imageurl={product.image_url} onClick={()=> openModal(product.id)}>
             <IconContainer>
-            <img onClick={(event)=> {handleIconClick(event, product.id); BookmarkStorage(product)}}
-            src ={starList[index] ? imgOn :imgOff} alt="img" width="25px" height="25px"/>
+            <img src ={imgOn} alt="img" width="25px" height="25px"/>
             </IconContainer>
             </ImgContainer>
              <div className="title_discount">
@@ -195,8 +184,8 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
             <div key={product.id}>
             <ImgContainer imageurl={product.image_url} onClick={()=> openModal(product.id)}>
             <IconContainer>
-            <img onClick={(event)=> {handleIconClick(event, product.id); BookmarkStorage(product)}}
-            src ={starList[index] ? imgOn :imgOff} alt="img" width="25px" height="25px"/>
+            <img
+            src ={imgOn} alt="img" width="25px" height="25px"/>
             </IconContainer>
             </ImgContainer>
             <h3># {product.title}</h3>
@@ -218,4 +207,4 @@ function ItemByButtons({buttonType, products, setSelectedProductId, isOnToast, s
     
 };
 
-export default ItemByButtons;
+export default BookmarkList;

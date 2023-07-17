@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const Modalbox = styled.div`
-max-height: 19.5vh;
+max-height: 20.5vh;
+width: 125px;
 display: flex;
 flex-direction: column;
 position: absolute;
@@ -63,15 +64,15 @@ border: 1px solid rgba(0, 0, 0, 0.1);
 
 
 
-function Modal(){
+function Dropdown(){
 
     return (
         <Modalbox>
             <div id="box1">김진현님 안녕하세요</div>
-            <div id="box2">🎁 상품리스트 페이지</div>
-            <div id="box3">⭐️ 북마크 페이지</div>
+            <Link to ="/products/list" style={{textDecoration:"none", color:"black"}}><div id="box2">🎁 상품리스트 페이지</div></Link>
+            <Link to ="bookmark" style={{textDecoration:"none", color:"black"}}><div id="box3">⭐️ 북마크 페이지</div></Link>
         </Modalbox>
     )
 }
 
-export default Modal
+export default Dropdown

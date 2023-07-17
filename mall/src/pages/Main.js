@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import "../App.css";
-import {useState,useEffect} from "react";
-import axios from "axios";
+import '../App.css';
 import Itemrender from "../components/Itemrender";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import Bookmarkrender from "../components/Bookmarkrender";
 
-
-export const Itemlistalign = styled.div`
+export const Itemlistalignment =styled.div`
 display:flex;
 justify-content: space-evenly;
 flex-direction:row;
@@ -60,35 +61,43 @@ margin-top: -1vh;
 }
 `
 
-
-function Main () {
-
-    const [products,setProducts]=useState([]);
-    const [selectedProductId,setSelectedProductId]=useState(null);
-
-    useEffect(()=>{
-        axios
-            .get("http://cozshopping.codestates-seb.link/api/v1/products?count=4")
-            .then(res=>{
-                console.log(res.data)
-                setProducts(res.data);
-
-            }).catch(err=>{
-                console.log(err);
-            })
-    },[])
+function Main({bookmarks, setBookmarks}) {
+  const [products, setProducts] = useState([]);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
 
-    return (
-        <>
-         <div className="alignbox2">
-            <h2>상품 리스트</h2>
-        </div>
-        <Itemlistalign>
-            <Itemrender products={products} selectedProductId={selectedProductId} setSelectedProductId={setSelectedProductId} />
-        </Itemlistalign>
-        </>
-    )
+  useEffect(() => {
+    axios
+      .get('http://cozshopping.codestates-seb.link/api/v1/products?count=4')
+      .then(response => {
+        console.log(response.data); // 받은 데이터 확인
+        setProducts(response.data); // 받은 데이터로 products 상태 업데이트
+      })
+      .catch(error => {
+        console.log("에러:", error);
+      });
+  }, []);
+
+
+  return (
+    <>
+    <div className="alignbox2">
+    <h2>상품 리스트</h2>
+    </div>
+    <Itemlistalignment>
+    <Itemrender products={products} selectedProductId={selectedProductId} setSelectedProductId={setSelectedProductId} bookmarks={bookmarks}/>
+    </Itemlistalignment>
+    <div className="alignbox2">
+     <h2>북마크 리스트</h2>
+    </div>
+     <Itemlistalignment>
+    <Bookmarkrender bookmarks={bookmarks} setBookmarks={setBookmarks} setSelectedProductId={setSelectedProductId}/>
+     </Itemlistalignment>
+    </>
+  );
 }
+
+
+
 
 export default Main;

@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../images/메인로고.png";
 import hamburger from "../images/햄버거.png";
 import styled from "styled-components";
-import Modal from "./Modal";
+import Dropdown from "./Dropdown";
 import {useState} from "react";
 import '../App.css'
 import {Link} from "react-router-dom";
@@ -58,7 +58,7 @@ function Header(){
     const openModalHandler = () => {
         isOpen === true?setIsOpen(false):setIsOpen(true);
     }
-
+    
 
     return (
         <>
@@ -80,7 +80,7 @@ function Header(){
         </HeaderContainer>
 
         <div className="alignbox">
-            {isOpen ? <Modal/>:null}
+            {isOpen ? <Dropdown/>:null}
         </div>
         </>
     )
